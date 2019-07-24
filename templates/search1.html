@@ -1,0 +1,81 @@
+{% extends "layout5.html" %}
+{% block content %}
+  <main role="main" class="container">
+    <div class="jumbotron" >
+        <div class="row">
+        <div class="md-form active-cyan active-cyan-2 mb-3" style="padding: 20px; margin: 0px 0px 0px 380px">
+            <input type="search" id="search" value="" class="form-control" aria-label="Search" data-table="order-table" placeholder="Search Here">
+        </div>
+    </div>
+   <table style="width:100%" border="1px solid black;" class="order-table table" >
+       <thead>
+      <th>Job ID</th>
+      <th>Name</th>
+      <th>Round 1</th>
+       <th>Round 2</th>
+       <th>Round 3</th>
+       <th>Round 4</th>
+       <th>HR</th>
+      <th>Offer</th>
+      <th>Joined</th>
+      </thead>
+       <tbody>
+  {% for item in data1 %}
+  <tr>
+      <th> {{ item[0] }}  </th>
+      <th> {{ item[1] }}  </th>
+      <th> {{ item[2] }}  </th>
+      <th> {{ item[3] }}  </th>
+      <th> {{ item[4] }}  </th>
+      <th> {{ item[5] }}</th>
+      <th> {{ item[6] }}</th>
+      <th> {{ item[7] }}</th>
+      <th> {{ item[8] }}</th>
+  </tr>
+  {% endfor %}
+       </tbody>
+      </table>
+</div>
+      <script>
+            (function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('form-control');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+        </script>
+  </main>
+{% endblock content %}
